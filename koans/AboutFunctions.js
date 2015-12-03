@@ -81,6 +81,8 @@ describe("About Functions", function() {
     expect(returnAllArgs("first", "second", "third")).toBe("first,second,third");
   });
 
+
+
   it("should pass functions as values", function () {
 
     var appendRules = function (name) {
@@ -95,7 +97,7 @@ describe("About Functions", function() {
     expect(praiseSinger.givePraise("John")).toBe("John rules!");
 
     praiseSinger.givePraise = appendDoubleRules;
-    expect(praiseSinger.givePraise("Mary")).toBe("Mary totally rules!";
+    expect(praiseSinger.givePraise("Mary")).toBe("Mary totally rules!");
 
   });
 });

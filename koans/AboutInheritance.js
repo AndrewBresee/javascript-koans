@@ -91,7 +91,7 @@ describe("About Crockford's inheritance improvement", function() {
 
 
   it("should be able to call a method on the base object", function() {
-    expect(this.gonzo.answerNanny()).toEqual(("Everything's cool!");
+    expect(this.gonzo.answerNanny()).toEqual(("Everything's cool!"));
   });
 
 
