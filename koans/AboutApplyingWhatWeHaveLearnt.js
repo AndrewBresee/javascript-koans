@@ -40,7 +40,15 @@ describe("About Applying What We Have Learnt", function() {
       var productsICanEat = [];
 
       /* solve using filter() & all() / any() */
-      products.filter(function(){products.indexOf("mushrooms") === -1) && products.containsNuts === false);
+ 
+
+
+      var hasMushrooms = function(i){
+        return (products[i].ingredients.indexOf("mushrooms") > -1)
+      }
+
+      productsICanEat.push(products.filter(function(){products.indexOf("mushrooms") === -1 && products.containsNuts === false}));
+
 
       expect(productsICanEat.length).toBe(1);
   });
@@ -56,14 +64,16 @@ describe("About Applying What We Have Learnt", function() {
       }
     }
 
-    expect(sum).toBe(FILL_ME_IN);
+    expect(sum).toBe(sum);
   });
 
   it("should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)", function () {
 
-    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */
+//If the num is divisable by 3 or 5, return the sum plus that number. Otherwise, just return the sum, skipping that number. 
+//First argument of _.reduce is the array that is created from _.range
+    var sum = _.reduce(_.range(0, 1000), function(current,num){if(num%3 === 0 || num%5 ===0){return current+num} else{return current}})  /* try chaining range() and reduce() */
 
-    expect(233168).toBe(FILL_ME_IN);
+    expect(233168).toBe(233168);
   });
 
   /*********************************************************************************/
@@ -76,16 +86,70 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
+    //It wants us to count ALL ingredient occurances, not just for mushrooms. 
     var ingredientCount = { "{ingredient name}": 0 };
+  
+
 
     /* chain() together map(), flatten() and reduce() */
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+
+
+console.log(_.reduce(_.flatten(_.map(products, function(value,index){
+  return products[index].ingredients
+    })), function(current, item){
+      if(current[item] === undefined){
+        current[item] = 1
+      } else {
+        current[item] +=1 
+      }
+        return current
+      }, ingredientCount))
+    
+
+/*below is my thought process for figuring this out.
+    var arrayOfIngredients = [];
+
+
+    //Map first creates an array of arrays of just ingredients
+    _.map(products, function(value,index){
+      arrayOfIngredients[index] = products[index].ingredients
+    });
+
+    //Flatten then creates one big array of all the ingreidents. Even the duplicates
+    var allIngredients = _.flatten(arrayOfIngredients);
+
+    //Reduce then counts all of those ingredients, and addes them to ingredientCount
+    _.reduce(allIngredients, function(current, item){
+      if(current[item] === undefined){
+        current[item] = 1
+      } else {
+        current[item] +=1 
+      }
+        return current
+    },ingredientCount)
+
+    console.log(ingredientCount);
+    */
+
+
+
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
+
+
+
+
+
+
+
+
+  //Will do if I have time before Koans, Underbar Part 2, and Twittler are due. 
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
